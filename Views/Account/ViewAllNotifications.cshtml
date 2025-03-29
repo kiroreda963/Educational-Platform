@@ -1,0 +1,215 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #1a73e8;
+            --dark-blue: #0d47a1;
+            --light-blue: #e8f0fe;
+            --hover-blue: #d2e3fc;
+        }
+
+        body {
+            background-color: #f8faff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+        }
+
+        .notifications-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            background-color: var(--primary-blue);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .page-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .notification-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .notification-card {
+            background-color: white;
+            border-left: 4px solid var(--primary-blue);
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: transform 0.2s;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .notification-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+        }
+
+        .notification-card.unread {
+            background-color: var(--light-blue);
+        }
+
+        .notification-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .notification-time {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .notification-message {
+            margin-bottom: 10px;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        .notification-footer {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+        }
+
+        .urgency-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            display: inline-block;
+            font-weight: 500;
+        }
+
+        .urgency-low {
+            background-color: #e3f2fd;
+            color: #0d47a1;
+        }
+
+        .urgency-medium {
+            background-color: #fff3e0;
+            color: #e65100;
+        }
+
+        .urgency-high {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            display: inline-block;
+            font-weight: 500;
+        }
+
+        .status-read {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .status-unread {
+            background-color: #e8eaf6;
+            color: #3949ab;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .empty-icon {
+            font-size: 3rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+
+        .empty-text {
+            color: #666;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    @model List<Milestone__3.Models.Notification>
+    @{
+        Layout = null;
+    }
+
+    <div class="notifications-container">
+        <div class="page-header">
+            <h2><i class="fas fa-bell me-2"></i>Notifications</h2>
+            <span class="badge bg-primary">@Model.Count</span>
+        </div>
+
+        @if (Model.Count == 0)
+        {
+            <div class="empty-state">
+                <div class="empty-icon">
+                    <i class="fas fa-bell-slash"></i>
+                </div>
+                <p class="empty-text">You don't have any notifications at the moment.</p>
+            </div>
+        }
+        else
+        {
+            <ul class="notification-list">
+                @foreach (var notification in Model)
+                {
+                    <li class="notification-card @(notification.ReadStatus ? "" : "unread")">
+                        <div class="notification-header">
+                            <span class="notification-time">
+                                <i class="far fa-clock me-1"></i>
+                                @notification.Timestamp.ToString("MMM d, yyyy h:mm tt")
+                            </span>
+
+                            @if (!notification.ReadStatus)
+                            {
+                                <span class="badge rounded-pill bg-primary">New</span>
+                            }
+                        </div>
+                        <div class="notification-message">
+                            @notification.Message
+                        </div>
+                        <div class="notification-footer">
+                            <span class="urgency-badge
+                                  @(notification.UrgencyLevel.ToLower() == "low" ? "urgency-low" :
+                                    notification.UrgencyLevel.ToLower() == "medium" ? "urgency-medium" : "urgency-high")">
+                                <i class="fas fa-exclamation-circle me-1"></i>
+                                @notification.UrgencyLevel
+                            </span>
+                            <span class="status-badge @(notification.ReadStatus ? "status-read" : "status-unread")">
+                                <i class="fas @(notification.ReadStatus ? "fa-check-circle" : "fa-circle") me-1"></i>
+                                @(notification.ReadStatus ? "Read" : "Unread")
+                            </span>
+                        </div>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

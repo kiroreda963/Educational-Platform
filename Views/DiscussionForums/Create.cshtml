@@ -1,0 +1,85 @@
+﻿@model Milestone__3.Models.DiscussionForum
+
+@{
+    ViewData["Title"] = "Create";
+    var role = ViewBag.Role as string;
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header text-white bg-primary">
+            <h1 class="text-center mb-0">Create New Discussion Forum</h1>
+        </div>
+
+        <div class="card-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger mb-4"></div>
+
+                <!-- Module Selection -->
+                <div class="form-group mb-3">
+                    <label asp-for="ModuleId" class="form-label">Select Module</label>
+                    <select asp-for="ModuleId" class="form-select" asp-items="ViewBag.ModuleId"></select>
+                </div>
+
+                <!-- Course Selection -->
+                <div class="form-group mb-3">
+                    <label asp-for="CourseId" class="form-label">Select Course</label>
+                    <select asp-for="CourseId" class="form-select" asp-items="ViewBag.CourseId"></select>
+                </div>
+
+                <!-- Title Field -->
+                <div class="form-group mb-3">
+                    <label asp-for="Title" class="form-label">Forum Title</label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <!-- Description Field -->
+                <div class="form-group mb-3">
+                    <label asp-for="Description" class="form-label">Forum Description</label>
+                    <textarea asp-for="Description" class="form-control" rows="4" placeholder="Describe the forum topic"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="mt-4 d-flex justify-content-between">
+                    @if (!string.IsNullOrEmpty(role))
+                    {
+                        if (role == "Admin")
+                        {
+                            <a href="@Url.Action("Forum", "Admin")" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Back to Admin Forums
+                            </a>
+                        }
+                        else if (role == "Learner")
+                        {
+                            <a href="@Url.Action("Forum", "Learner")" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Back to Learner Forums
+                            </a>
+                        }
+                        else if (role == "Instructor")
+                        {
+                            <a href="@Url.Action("Forum", "Instructor")" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Back to Instructor Forums
+                            </a>
+                        }
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Index", "DiscussionForums")" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Back to Forums
+                        </a>
+                    }
+
+                    <input type="submit" value="Create Forum" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

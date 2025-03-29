@@ -1,0 +1,107 @@
+﻿@model Milestone__3.Models.LearningPath
+
+@{
+    ViewData["Title"] = "Learning Path Details";
+}
+
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(to bottom, #ece9e6, #ffffff);
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        color: #4A90E2;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: auto;
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .card {
+        border: none;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        margin-top: 20px;
+        border-radius: 10px;
+    }
+
+    .card-body {
+        font-size: 1.1rem;
+        color: #333;
+        padding: 20px;
+    }
+
+    .row {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+        .row .col-md-4 {
+            font-weight: bold;
+            color: #4A90E2;
+            text-align: right;
+        }
+
+        .row .col-md-8 {
+            text-align: left;
+            color: #555;
+        }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+        padding: 10px 20px;
+        font-size: 1rem;
+        border-radius: 5px;
+        transition: all 0.3s ease-in-out;
+        border: none;
+    }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(108, 117, 125, 0.3);
+        }
+</style>
+
+<div class="container mt-5">
+    <h1>Learning Path Details</h1>
+
+    <div class="card shadow-sm mt-4">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">Path ID:</div>
+                <div class="col-md-8">@Model.PathId</div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-4">Completion Status:</div>
+                <div class="col-md-8">@Model.CompletionStatus</div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-4">Custom Content:</div>
+                <div class="col-md-8">@Model.CustomContent</div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-4">Adaptive Rules:</div>
+                <div class="col-md-8">@Model.AdaptiveRules</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a asp-action="LearningPaths" class="btn btn-secondary">Back to Learning Paths</a>
+    </div>
+</div>

@@ -1,0 +1,181 @@
+﻿@model IEnumerable<Milestone__3.Models.StudentAssessmentModel>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Assessments</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .assessments-container {
+            width: 95%;
+            max-width: 1200px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .page-title {
+            color: #333;
+            font-size: 1.8rem;
+            margin: 0;
+            text-align: left;
+        }
+
+        .assessments-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+            .assessments-table thead {
+                background-color: #f0f4f8;
+            }
+
+            .assessments-table th,
+            .assessments-table td {
+                padding: 15px;
+                text-align: left;
+                border-bottom: 1px solid #e6e9ee;
+            }
+
+            .assessments-table th {
+                color: #2c3e50;
+                font-weight: 600;
+                text-transform: uppercase;
+                font-size: 0.9rem;
+            }
+
+            .assessments-table tr:hover {
+                background-color: #f9fbfc;
+                transition: background-color 0.3s ease;
+            }
+
+        .assessment-title {
+            font-weight: 600;
+            color: #3498db;
+        }
+
+        .performance-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .performance-excellent {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+
+        .performance-good {
+            background-color: #fcf8e3;
+            color: #8a6d3b;
+        }
+
+        .performance-average {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+
+        .no-data {
+            color: #777;
+            font-style: italic;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="assessments-container">
+        <div class="page-header">
+            <h1 class="page-title">Student Assessments</h1>
+        </div>
+
+        @if (Model != null && Model.Any())
+        {
+            <table class="assessments-table">
+                <thead>
+                    <tr>
+                        <th>Assessment Title</th>
+                        <th>Scored Points</th>
+                        <th>Course</th>
+                        <th>Module</th>
+                        <th>Total Marks</th>
+                        <th>Performance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var assessment in Model)
+                    {
+                        <tr>
+                            <td class="assessment-title">@assessment.Assessments_Title</td>
+                            <td>@assessment.scoredPoint</td>
+                            <td>@assessment.Course_Title</td>
+                            <td>@assessment.Module_Title</td>
+                            <td>@assessment.total_marks</td>
+                            <td>
+                                <span class="performance-badge @GetPerformanceClass(assessment.scoredPoint, assessment.total_marks)">
+                                    @GetPerformanceText(assessment.scoredPoint, assessment.total_marks)
+                                </span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p class="no-data">No assessments found.</p>
+        }
+    </div>
+</body>
+</html>
+
+@functions {
+    private string GetPerformanceClass(double scoredPoints, double totalMarks)
+    {
+        var percentage = (scoredPoints / totalMarks) * 100;
+        return percentage switch
+        {
+            >= 90 => "performance-excellent",
+            >= 70 => "performance-good",
+            _ => "performance-average"
+        };
+    }
+
+    private string GetPerformanceText(double scoredPoints, double totalMarks)
+    {
+        var percentage = (scoredPoints / totalMarks) * 100;
+        return percentage switch
+        {
+            >= 90 => "Excellent",
+            >= 70 => "Good",
+            _ => "Average"
+        };
+    }
+}

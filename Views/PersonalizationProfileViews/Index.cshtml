@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Milestone__3.Models.PersonalizationProfileView>
+
+@{
+    ViewData["Title"] = "Personalization Profile View";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-primary">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Profile ID</th>
+            <th>Learner Name</th>
+            <th>Prefered Content Type</th>
+            <th>Emotional State</th>
+            <th>Personality Type</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProfileId</td>
+                <td>@item.Learner.FirstName @item.Learner.LastName</td>
+                <td>@item.PreferedContentType</td>
+                <td>@item.EmotionalState</td>
+                <td>@item.PersonalityType</td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = item.ProfileId })" class="btn btn-warning">Edit</a>
+                    <a href="@Url.Action("Details", new { id = item.ProfileId })" class="btn btn-info">Details</a>
+                    <a href="@Url.Action("Delete", new { id = item.ProfileId })" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

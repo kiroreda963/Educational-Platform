@@ -1,0 +1,31 @@
+﻿@model Milestone__3.Models.PersonalizationProfileView
+
+@{
+    ViewData["Title"] = "Edit Personalization";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="Edit" method="post">
+    <div class="form-group">
+        <label asp-for="ProfileId"></label>
+        <input asp-for="ProfileId" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="LearnerId"></label>
+        <input asp-for="LearnerId" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="PreferedContentType"></label>
+        <input asp-for="PreferedContentType" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="EmotionalState"></label>
+        <input asp-for="EmotionalState" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="PersonalityType"></label>
+        <input asp-for="PersonalityType" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

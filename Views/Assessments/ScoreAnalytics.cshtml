@@ -1,0 +1,23 @@
+﻿@model Milestone__3.Models.AssessmentAnalyticsModel
+
+<div class="container">
+    <h2>Score Analytics for @Model.AssessmentTitle</h2>
+    <table class="table table-bordered">
+        <tr>
+            <th>Average Score</th>
+            <td>@Model.AverageScore</td>
+        </tr>
+        <tr>
+            <th>Minimum Score</th>
+            <td>@Model.MinScore</td>
+        </tr>
+        <tr>
+            <th>Maximum Score</th>
+            <td>@Model.MaxScore</td>
+        </tr>
+        <tr>
+            <th>Total Learners</th>
+            <td>@Model.TotalLearners</td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,55 @@
+﻿@model Milestone__3.Models.DiscussionForum
+
+@{
+    ViewData["Title"] = "Forum Details";
+}
+
+<div class="container mt-4">
+    <!-- Forum Title and Description -->
+    <h1 class="mb-4">@Model.Title</h1>
+    <p><strong>Description:</strong> @Model.Description</p>
+    <p><strong>Last Active:</strong> @Model.LastActive.ToString()</p>
+    <p><strong>Created On:</strong> @Model.Timestamp.ToString()</p>
+
+    <!-- Discussions Section -->
+    <h2 class="mt-5 mb-3">Discussions</h2>
+
+    @if (ViewBag.Discussions != null && ((List<Milestone__3.Models.LearnerDiscussion>)ViewBag.Discussions).Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-striped table-hover shadow-sm">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Post</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var discussion in (List<Milestone__3.Models.LearnerDiscussion>)ViewBag.Discussions)
+                    {
+                        <tr>
+                            <td>@discussion.Post</td>
+                            <td>@discussion.Time.ToString()</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning text-center" role="alert">
+            No discussions have been posted for this forum yet.
+        </div>
+    }
+
+    <!-- Back Button -->
+    <div class="mt-4">
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back to Forums
+        </a>
+    </div>
+</div>
+
+<!-- Font Awesome for Icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>

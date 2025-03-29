@@ -1,0 +1,131 @@
+﻿@model Milestone__3.Models.User
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            position: relative; /* Necessary for absolute positioning inside body */
+        }
+
+        .profile-container {
+            width: 80%;
+            margin: 30px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-header h1 {
+            color: #333;
+        }
+
+        .profile-details {
+            margin-bottom: 20px;
+        }
+
+        .profile-details p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .profile-details strong {
+            color: #4CAF50;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-green {
+            background-color: #4CAF50; /* Green button */
+            color: white;
+        }
+
+        .btn-green:hover {
+            background-color: #45a049;
+        }
+
+        .btn-red {
+            background-color: #e74c3c; /* Red button */
+            color: white;
+            font-size: 14px;  /* Smaller font size */
+            padding: 8px 16px; /* Smaller button size */
+        }
+
+        .btn-red:hover {
+            background-color: #c0392b;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-container a {
+            text-decoration: none;
+        }
+
+        /* Right-align the delete button */
+        .delete-btn-container {
+            position: absolute;
+            top: 30px; /* Position from top */
+            right: 30px; /* Position from right */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+            <h1>Welcome, @Model.FirstName @Model.LastName</h1>
+        </div>
+
+        <div class="profile-details">
+            <p><strong>Email:</strong> @Model.Email</p>
+            <p><strong>Role:</strong> @Model.Role</p>
+            <p><strong>Gender:</strong> @Model.Gender</p>
+            <p><strong>Country:</strong> @Model.Country</p>
+        </div>
+
+        <!-- Delete Account Button in Top-right Corner -->
+        <div class="delete-btn-container">
+            <form asp-action="DeleteAccount" method="post" onsubmit="return confirm('Are you sure you want to delete your account? This action is irreversible.');">
+                <button type="submit" class="btn btn-red">Delete Account</button>
+            </form>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="btn-container">
+            <a href="@Url.Action("Index", "Users")">
+                <button class="btn btn-green">Users</button>
+            </a>
+            <a href="@Url.Action("Index", "PersonalizationProfileViews")">
+                <button class="btn btn-green">Personalization Profiles</button>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

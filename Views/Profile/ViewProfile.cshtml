@@ -1,0 +1,95 @@
+﻿@model Milestone__3.Models.Learner
+
+@{
+    ViewData["Title"] = "Profile Information";
+}
+
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(to right, #ece9e6, #ffffff);
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: auto;
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+        margin-top: 30px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        color: #4A90E2;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .row {
+        margin-bottom: 10px;
+    }
+
+        .row strong {
+            color: #4A90E2;
+        }
+
+    .btn-back {
+        display: block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        font-size: 1rem;
+        background-color: #4A90E2;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+        .btn-back:hover {
+            background-color: #357ABD;
+            box-shadow: 0 4px 10px rgba(74, 144, 226, 0.4);
+        }
+</style>
+
+<div class="container">
+    <h1>Profile Information</h1>
+
+    <div class="row">
+        <div class="col-md-4"><strong>First Name:</strong></div>
+        <div class="col-md-8">@Model.FirstName</div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4"><strong>Last Name:</strong></div>
+        <div class="col-md-8">@Model.LastName</div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4"><strong>Gender:</strong></div>
+        <div class="col-md-8">@Model.Gender</div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4"><strong>Birth Date:</strong></div>
+        <div class="col-md-8">@Model.BirthDate.ToString("yyyy-MM-dd")</div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4"><strong>Country:</strong></div>
+        <div class="col-md-8">@Model.Country</div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4"><strong>Cultural Background:</strong></div>
+        <div class="col-md-8">@Model.CulturalBackground</div>
+    </div>
+
+    <a href="@Url.Action("Index", "Home")" class="btn-back">Back to Dashboard</a>
+</div>

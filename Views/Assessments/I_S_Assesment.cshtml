@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Milestone__3.Models.InstructorTakenAssesments>
+
+@{
+    ViewData["Title"] = "Learners Taken Assessments";
+}
+
+<h1>Learner Taken Assessments</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Assessment Title</th>
+            <th>Scored Points</th>
+            <th>Course Title</th>
+            <th>Module Title</th>
+            <th>Total Marks</th>
+            <th>Learners First Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Assessments_Title</td>
+                    <td>@item.scoredPoint</td>
+                    <td>@item.Course_Title</td>
+                    <td>@item.Module_Title</td>
+                    <td>@item.total_marks</td>
+                    <td>@item.first_name</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6" class="text-center">No data available</td>
+            </tr>
+        }
+    </tbody>
+</table>

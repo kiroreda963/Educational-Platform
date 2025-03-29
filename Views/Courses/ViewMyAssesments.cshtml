@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Milestone__3.Models.MyassesmentsModel>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Assessments</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Assessments</h1>
+
+    @if (Model != null && Model.Any())
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>Assessment Title</th>
+                    <th>Course Title</th>
+                    <th>Module Title</th>
+                    <th>Scored Points</th>
+                    <th>Total Marks</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var assessment in Model)
+                {
+                    <tr>
+                        <td>@assessment.Assessments_Title</td>
+                        <td>@assessment.Course_Title</td>
+                        <td>@assessment.Module_Title</td>
+                        <td>@assessment.scoredPoint</td>
+                        <td>@assessment.total_marks</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p style="text-align: center;">No assessments found.</p>
+    }
+</body>
+</html>

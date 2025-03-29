@@ -1,0 +1,164 @@
+﻿@model IEnumerable<Milestone__3.Models.MyCourseViewModel>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Courses</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .courses-container {
+            width: 95%;
+            max-width: 1200px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .page-title {
+            color: #333;
+            font-size: 1.8rem;
+            margin: 0;
+            text-align: left;
+        }
+
+        .courses-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+            .courses-table thead {
+                background-color: #f0f4f8;
+            }
+
+            .courses-table th,
+            .courses-table td {
+                padding: 15px;
+                text-align: left;
+                border-bottom: 1px solid #e6e9ee;
+            }
+
+            .courses-table th {
+                color: #2c3e50;
+                font-weight: 600;
+                text-transform: uppercase;
+                font-size: 0.9rem;
+            }
+
+            .courses-table tr:hover {
+                background-color: #f9fbfc;
+                transition: background-color 0.3s ease;
+            }
+
+        .course-title {
+            font-weight: 600;
+            color: #3498db;
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .difficulty-easy {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+
+        .difficulty-medium {
+            background-color: #fcf8e3;
+            color: #8a6d3b;
+        }
+
+        .difficulty-hard {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+    </style>
+</head>
+<body>
+    <div class="courses-container">
+        <div class="page-header">
+            <h1 class="page-title">My Enrolled Courses</h1>
+        </div>
+
+        <table class="courses-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Credit Points</th>
+                    <th>Difficulty Level</th>
+                    <th>Enrollment Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var course in Model)
+                {
+                    <tr>
+                        <td class="course-title">@course.Title</td>
+                        <td>@course.Credit_Points</td>
+                        <td>
+                            <span class="difficulty-badge @GetDifficultyClass(course.Difficulty_Level)">
+                                @GetDifficultyText(course.Difficulty_Level)
+                            </span>
+                        </td>
+                        <td>@course.enrollment_date.ToString("MMM dd, yyyy")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+@functions {
+    private string GetDifficultyClass(int difficultyLevel)
+    {
+        return difficultyLevel switch
+        {
+            1 => "difficulty-easy",
+            2 => "difficulty-medium",
+            3 => "difficulty-hard",
+            _ => ""
+        };
+    }
+
+    private string GetDifficultyText(int difficultyLevel)
+    {
+        return difficultyLevel switch
+        {
+            1 => "Easy",
+            2 => "Medium",
+            3 => "Hard",
+            _ => "Unknown"
+        };
+    }
+}
