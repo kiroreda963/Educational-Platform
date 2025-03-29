@@ -65,6 +65,10 @@ Include screenshots of the platform here:
 
 
 
+![Screenshot 2025-03-29 075237](https://github.com/user-attachments/assets/e37efbbe-193b-408d-b3f4-977ea3dbe0e0)
+
+
+
 
 ![Screenshot 2025-03-29 080841](https://github.com/user-attachments/assets/86ea780c-0728-4d8f-96b4-98d4c637ed24)
 
