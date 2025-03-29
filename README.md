@@ -39,7 +39,7 @@ This project is an **Educational Platform** designed to support a structured and
 - **Progress Reports** are generated for learners to track their achievements and areas for improvement.
 
 ## Screenshots
-Include screenshots of the platform here:
+
 
 ![Screenshot 2025-03-29 074652](https://github.com/user-attachments/assets/9cd82f4a-1485-4d84-a654-feac8ffcfec2)
 
